@@ -1,5 +1,5 @@
 # Census Population Tutorial / Project
-# Automate the Boring Stuff With Python, page 272
+# Adapted from Automate the Boring Stuff With Python, page 272
 # This script takes the file 'censuspopdata.xlsx', an Excel spreadsheet that lists population by census tract,
 # as input.
 # It then does the following...
