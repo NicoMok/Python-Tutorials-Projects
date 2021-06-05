@@ -1,0 +1,73 @@
+# Census Population Tutorial / Project
+# Automate the Boring Stuff With Python, page 272
+# This script takes the file 'censuspopdata.xlsx', an Excel spreadsheet that lists population by census tract,
+# as input.
+# It then does the following...
+# 1. Counts the number of census tracts in each county
+# 2. Counts the total population of each county
+# 3. Prints the results to a text file
+
+# Import openpyxl
+import openpyxl
+
+# Load the workbook
+wb = openpyxl.load_workbook('censuspopdata.xlsx')
+sheet = wb['Population by Census Tract']
+
+# Initiate a blank dictionary
+# It should look like this once populated...
+# populationdict =
+#   {'AL': { 'Autunga': {'censustract': # of census, 'pop': population}
+#            'Baldwin': {'censustract': # of census, 'pop': population}
+#           } ...
+
+populationdict = {}
+
+for rowIndex in range(2,sheet.max_row+1):
+    # Define the value of state, county, population so that it's easier to
+    # work with (rather than calling sheet['B'+str()].value each time
+    state = sheet['B'+str(rowIndex)].value
+    county = sheet['C'+str(rowIndex)].value
+    population = sheet['D'+str(rowIndex)].value
+
+    # If the 'state' index doesn't exist within the dict, add the state index
+    # and the associated value, i.e. {county: {'censustract': 0, 'pop':0}}
+    # within the dictionary
+    if state not in populationdict:
+        populationdict[state] = {county: {'censustract':0, 'pop':0}}
+
+    # If the 'state' index is within the dict, but the 'county index of the
+    # sub-dictionary is not there, then add the county
+    if county not in populationdict[state]:
+        populationdict[state][county] = {'censustract':0, 'pop':0}
+
+    # ^^^ In either situation, we always start censustract = 0 and pop = 0.
+
+    # Then we increment censustract and add the population to pop.
+    populationdict[state][county]['censustract'] += 1
+    populationdict[state][county]['pop'] += population
+
+# Write the results to a text file
+file = open('Population.txt', 'w')
+
+# Print the dictionary populationdict to the file. To ensure that the results are displayed neatly, import
+# pprint
+import pprint
+
+# To print to console, use pprint.pp(populationdict)
+# To print to a file neatly, use file.write(pprint.pformat(populationdict))
+file.write(pprint.pformat(populationdict))
+
+# Don't forget to close to file once you are done writing into it.
+file.close
+
+
+
+
+
+
+
+
+
+
+
