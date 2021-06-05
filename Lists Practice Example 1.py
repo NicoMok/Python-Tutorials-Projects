@@ -1,12 +1,11 @@
 # List Tutorial #1
-# Automate the Boring Stuff With Python page 114
+# Problem obtained from Automate the Boring Stuff With Python page 114
 
 allGuests = {'Alice': {'apples':5, 'pretzels':12},
              'Bob': {'ham sandwiches':3, 'apples':2},
              'Carol': {'cups':3, 'apple pies':1}}
 
-# Create a function that determines the number of food items each
-# person has brought
+# Create a list consisting of all the items in the dictionary above.
 
 listOfItems = []
 for name in allGuests.keys():
